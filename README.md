@@ -34,3 +34,25 @@ List:
 - Depending on if you are on Debian/Ubuntu or Redhat/Centos/RPM app, run ```dpkg -i <omnibus-cassandra-blabla>.deb``` OR ```rpm -Uvh <omnibus-cassandra-blabla>.rpm```
 - OPTIONAL: if you're running real production, do some real tuning of cassandra.yaml and cassandra-env.sh etc.
 
+# What if... ?
+
+## I don't wanna use this package, I want to use my own Cassandra!
+Just do so. You tell your HDeploy or other to just use that. This package is just there for convenience - but since it's a totally standard you can use whatever as long as it's Apache Cassandra
+
+## I wanna use another version than 3.7!
+Well, at least for HDeploy, it's compatible with 2.2 (maybe even 2.1 - gotta check)
+
+## I wanna use my own JDK
+I'd say, just go for OS packages, it will be simpler. This packaging is for convenience, it doesn't really do much all
+
+## I wanna use this for a cluster
+- Choose an odd number of servers. Such as 3 or 5. 3 is usually good
+- Do proper firewalling: either private networking - or if you're public good iptables/other rules. All servers must communicate with each other on ports
+- Set replication to the number of servers you got
+- Change the listen address / interface in cassandra.yaml (/opt/cassandra/conf/cassandra.yaml)
+- Add seeds, all the IP addresses / names of the servers in the cluster in cassandra.yaml
+
+
+Will write up more on this a bit later
+
+For now this is really to get started with a Cassandra server on localhost that takes zero work.
