@@ -29,14 +29,14 @@ It's a bundle a few pieces of software and config, which will be installed in /o
 List:
 - Apache Cassandra 3.7
 - Oracle Java runtime 1.8u74
-- A user omnicass (for 'omnibus cassandra') to run the daemon
+- A user 'cassandra' to run the daemon
 - A default configuration for Cassandra
 - A few symlinks, such as /usr/bin/java and /usr/bin/cqlsh if they don't already exist.
 
 # How to use?
 
-- Download .rpm or .deb file on [[http://www.hdeploy.org/download]] for the 'omnibus cassandra' package
-- Depending on if you are on Debian/Ubuntu or Redhat/Centos/RPM app, run ```dpkg -i <omnibus-cassandra-blabla>.deb``` OR ```rpm -Uvh <omnibus-cassandra-blabla>.rpm```
+- Download .rpm or .deb file on http://www.hdeploy.org/download - look for the 'omnibus cassandra' package
+- Depending on if you are on Debian/Ubuntu or Redhat/Centos/RPM app, run ```dpkg -i <cassandra-blabla>.deb``` OR ```rpm -Uvh <cassandra-blabla>.rpm```
 - OPTIONAL: if you're running real production, do some real tuning of cassandra.yaml and cassandra-env.sh etc.
 
 # What if... ?
