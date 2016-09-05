@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# Perform necessary cassandra removal steps
+# after package is uninstalled.
+#
+
+echo "cassandra has been uninstalled!"
+
+exit 0
