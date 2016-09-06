@@ -1,0 +1,21 @@
+--- orig/apache-cassandra-3.7/conf/cassandra.yaml	2016-09-06 16:25:09.243410500 +0000
++++ hdeploy/apache-cassandra-3.7/conf/cassandra.yaml	2016-09-06 16:27:09.435314091 +0000
+@@ -7,7 +7,7 @@
+ 
+ # The name of the cluster. This is mainly used to prevent machines in
+ # one logical cluster from joining another.
+-cluster_name: 'Test Cluster'
++cluster_name: 'hdeploy omnibus'
+ 
+ # This defines the number of tokens randomly assigned to this node on the ring
+ # The more tokens, relative to other nodes, the larger the proportion of data
+@@ -462,7 +462,8 @@
+ # The default value is the smaller of 8192, and 1/4 of the total space
+ # of the commitlog volume.
+ #
+-# commitlog_total_space_in_mb: 8192
++# This value is set super small as hdeploy/etc have little total data
++commitlog_total_space_in_mb: 100
+ 
+ # This sets the amount of memtable flush writer threads.  These will
+ # be blocked by disk io, and each one will hold a memtable in memory

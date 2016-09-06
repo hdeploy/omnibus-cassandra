@@ -1,8 +1,21 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Perform necessary cassandra removal steps
 # after package is uninstalled.
 #
+
+grep patrick.viet /etc/init.d/cassandra > /dev/null 2>&1
+if [ $? == 0 ]; then
+  update-rc.d -f cassandra remove
+  rm -f /etc/init.d/cassandra
+fi
+
+CHOME=`getent passwd cassandra | awk -F ':' '{ print $6; }'`
+if [ ${CHOME:0:15} == "/opt/cassandra/" ]; then
+  userdel -r cassandra
+  groupdel cassandra
+fi
+
 
 echo "cassandra has been uninstalled!"
 
