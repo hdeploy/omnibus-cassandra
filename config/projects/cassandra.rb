@@ -6,13 +6,13 @@
 
 name "cassandra"
 maintainer "patrick.viet@gmail.com"
-homepage "http://www.hdeploy.org"
+homepage "http://github.com/hdeploy/omnibus-cassandra/"
 
 # Defaults to C:/cassandra on Windows
 # and /opt/cassandra on all other platforms
 install_dir "#{default_root}/#{name}"
 
-build_version Omnibus::BuildVersion.semver
+build_version "3.7"
 build_iteration 1
 
 # Creates required build directories
