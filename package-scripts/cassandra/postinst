@@ -33,10 +33,15 @@ ln -s ../embedded/apache-cassandra/bin/cqlsh /opt/cassandra/bin/cqlsh
 mkdir -p $CHOME/logs $CHOME/data
 chown -R cassandra:cassandra $CHOME/logs $CHOME/data
 
-# Init scripts yay
-cp -f $CHOME/tools/bin/cassandra.init.debian /etc/init.d/cassandra
-chmod 755 /etc/init.d/cassandra
-update-rc.d cassandra start 50 2 3 4 5 . stop 50 0 1 6 . >/dev/null
+# Init scripts
+# Determine if I'm on RH or on Debian/Ubuntu
+if [ -e /etc/redhat-release ]; then
+
+else
+  cp -f $CHOME/tools/bin/cassandra.init.debian /etc/init.d/cassandra
+  chmod 755 /etc/init.d/cassandra
+  update-rc.d cassandra start 50 2 3 4 5 . stop 50 0 1 6 . >/dev/null
+fi
 
 echo "Starting Cassandra...!"
 invoke-rc.d cassandra start
