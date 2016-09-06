@@ -6,11 +6,24 @@
 
 PROGNAME=`basename $0`
 
+OPTDIR=/opt/cassandra
+
 error_exit()
 {
   echo "${PROGNAME}: ${1:-"Unknown Error"}" 1>&2
   exit 1
 }
+
+# Add group
+id -g cassandra > /dev/null || groupadd -g cassandra
+
+# Add user
+id -u cassandra > /dev/null || useradd -g cassandra -s /bin/false -d $OPTDIR
+
+# Data and logs directories.
+mkdir -p $OPTDIR/embedded/apache-cassandra/logs $OPTDIR/embedded/apache-cassandra/data
+chown -R cassandra:cassandra $OPTDIR/embedded/apache-cassandra/logs $OPTDIR/embedded/apache-cassandra/data
+
 
 echo "Thank you for installing cassandra!"
 
