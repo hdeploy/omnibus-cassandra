@@ -5,7 +5,8 @@ yum install -y gecode-devel
 wget -O /tmp/ruby23.rpm https://github.com/feedforce/ruby-rpm/releases/download/2.3.1/ruby-2.3.1-1.el6.x86_64.rpm
 yum install -y /tmp/ruby23.rpm
 
-yum install -y patch rpm-build
+yum install -y http://opensource.wandisco.com/centos/6/git/x86_64/wandisco-git-release-6-1.noarch.rpm
+yum install -y patch rpm-build git
 
 gem install bundle
 
