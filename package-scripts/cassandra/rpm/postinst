@@ -1,0 +1,47 @@
+#!/bin/sh
+#
+# Perform necessary cassandra setup steps
+# after package is installed.
+#
+
+PROGNAME=`basename $0`
+
+CHOME=/opt/cassandra/embedded/apache-cassandra
+
+error_exit()
+{
+  echo "${PROGNAME}: ${1:-"Unknown Error"}" 1>&2
+  exit 1
+}
+
+# Add group
+if ! getent group cassandra > /dev/null; then
+	groupadd -r cassandra
+fi
+
+# Add user
+if ! getent passwd cassandra > /dev/null; then
+	useradd -r -g cassandra -d $CHOME -s /bin/false \
+	   -c "Apache Cassandra Embedded" cassandra
+fi
+
+# useful symlink
+mkdir -p /opt/cassandra/bin
+ln -s ../embedded/apache-cassandra/bin/cqlsh /opt/cassandra/bin/cqlsh
+
+# Data and logs directories.
+mkdir -p $CHOME/logs $CHOME/data
+chown -R cassandra:cassandra $CHOME/logs $CHOME/data
+
+# Init scripts yay
+cp -f $CHOME/tools/bin/cassandra.init.rhel /etc/init.d/cassandra
+chmod 755 /etc/init.d/cassandra
+chkconfig --add cassandra
+
+echo "Starting Cassandra...!"
+service cassandra start
+
+
+echo "Thank you for installing cassandra!"
+
+exit 0

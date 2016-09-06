@@ -27,11 +27,12 @@ build do
   # General copy of all the decompressed tarball
   sync "apache-cassandra-#{version}", "#{install_dir}/embedded/apache-cassandra"
 
-  # Copy this file directly from the patch directory
-  # But it's actually a full file - it was just annoying to handle with the patch method...
-  copy File.join(Omnibus.possible_paths_for('config/patches').first, "cassandra/cassandra.init.debian"), "#{install_dir}/embedded/apache-cassandra/tools/bin"
+  # Init files ...
+  erb source: "cassandra.init.debian.erb", dest: "#{install_dir}/embedded/apache-cassandra/tools/bin/cassandra.init.debian",
+  erb source: "cassandra.init.rhel.erb", dest: "#{install_dir}/embedded/apache-cassandra/tools/bin/cassandra.init.rhel",
 
-  # have /opt/cassandra/bin/cqlsh
-  mkdir "#{install_dir}/bin"
+
+ "#{install_dir}/embedded/apache-cassandra/tools/bin"
+
 end
 
