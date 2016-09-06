@@ -28,8 +28,8 @@ build do
   sync "apache-cassandra-#{version}", "#{install_dir}/embedded/apache-cassandra"
 
   # Init files ...
-  erb source: "cassandra.init.debian.erb", dest: "#{install_dir}/embedded/apache-cassandra/tools/bin/cassandra.init.debian",
-  erb source: "cassandra.init.rhel.erb", dest: "#{install_dir}/embedded/apache-cassandra/tools/bin/cassandra.init.rhel",
+  erb source: "cassandra.init.debian.erb", dest: "#{install_dir}/embedded/apache-cassandra/tools/bin/cassandra.init.debian"
+  erb source: "cassandra.init.rhel.erb", dest: "#{install_dir}/embedded/apache-cassandra/tools/bin/cassandra.init.rhel"
 
 
  "#{install_dir}/embedded/apache-cassandra/tools/bin"
