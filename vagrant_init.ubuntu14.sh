@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo ubuntu14 > /etc/hostname
+hostname ubuntu14
+
 # No multiarch or deb-src -- faster
 sed -ie "s/^deb-src/#deb-src/g" /etc/apt/sources.list
 

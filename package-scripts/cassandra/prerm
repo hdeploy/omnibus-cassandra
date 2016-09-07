@@ -14,16 +14,24 @@ error_exit()
 
 service cassandra stop
 
-# Determine if I'm on RH or on Debian/Ubuntu
-if [ -x /sbin/chkconfig ]; then
+# Determine if I'm on RH or on Debian/Ubuntu or Systemd etc
+if [ -x /bin/systemctl ]; then
+	systemctl disable cassandra
+	rm -f /etc/systemd/system/cassandra.service
+
+elif [ -x /sbin/chkconfig ]; then
   chkconfig --del cassandra
+  rm -f /etc/init.d/cassandra
+
 elif [ -x /usr/sbin/update-rc.d ]; then
   update-rc.d remove cassandra
+  rm -f /etc/init.d/cassandra
+
 else
-  echo "not debian/ubuntu or debian. What??"
+  echo "not debian/ubuntu or rh. What??"
 fi
 
-rm -f /etc/init.d/cassandra
+
 
 CHOME=`getent passwd cassandra | awk -F ':' '{ print $6; }'`
 if [ ${CHOME:0:15} == "/opt/cassandra/" ]; then

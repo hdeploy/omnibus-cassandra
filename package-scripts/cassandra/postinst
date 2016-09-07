@@ -16,13 +16,13 @@ error_exit()
 
 # Add group
 if ! getent group cassandra > /dev/null; then
-	groupadd -r cassandra
+  groupadd -r cassandra
 fi
 
 # Add user
 if ! getent passwd cassandra > /dev/null; then
-	useradd -r -g cassandra -d $CHOME -s /bin/false \
-	   -c "Apache Cassandra Embedded" cassandra
+  useradd -r -g cassandra -d $CHOME -s /bin/false \
+     -c "Apache Cassandra Embedded" cassandra
 fi
 
 # useful symlink
@@ -33,12 +33,18 @@ mkdir -p $CHOME/logs $CHOME/data
 chown -R cassandra:cassandra $CHOME/logs $CHOME/data
 
 # Init scripts
-ln -sf $CHOME/bin/cassandra.init /etc/init.d/cassandra
 
-# Determine if I'm on RH or on Debian/Ubuntu
-if [ -x /sbin/chkconfig ]; then
+# Determine if I'm on RH or on Debian/Ubuntu or Systemd etc
+if [ -x /bin/systemctl ]; then
+  ln -sf $CHOME/tools/cassandra.service.systemd /etc/systemd/system/cassandra.service
+  systemctl enable cassandra
+
+elif [ -x /sbin/chkconfig ]; then
+  ln -sf $CHOME/bin/cassandra.init /etc/init.d/cassandra
   chkconfig --add cassandra
+
 elif [ -x /usr/sbin/update-rc.d ]; then
+  ln -sf $CHOME/tools/cassandra.init /etc/init.d/cassandra
   update-rc.d cassandra start 50 2 3 4 5 . stop 50 0 1 6 . >/dev/null
 else
   echo "not debian/ubuntu or debian. What??"

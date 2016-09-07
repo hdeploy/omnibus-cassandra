@@ -1,0 +1,18 @@
+[Unit]
+Description=Cassandra
+After=network.target
+
+[Service]
+Type=simple
+PIDFile=/opt/cassandra/embedded/apache-cassandra/logs/cassandra.pid
+User=cassandra
+Group=cassandra
+Environment=JAVA_HOME=/opt/cassandra/embedded/jre
+ExecStart=/opt/cassandra/embedded/apache-cassandra/bin/cassandra -p /opt/cassandra/embedded/apache-cassandra/logs/cassandra.pid
+StandardOutput=journal
+StandardError=journal
+LimitNOFILE=infinity
+
+[Install]
+WantedBy=multi-user.target
+
