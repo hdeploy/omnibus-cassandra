@@ -41,11 +41,11 @@ if [ -x /bin/systemctl ]; then
   systemctl daemon-reload
 
 elif [ -x /sbin/chkconfig ]; then
-  ln -sf $CHOME/bin/cassandra.init /etc/init.d/cassandra
+  ln -sf $CHOME/tools/cassandra.init.redhat /etc/init.d/cassandra
   chkconfig --add cassandra
 
 elif [ -x /usr/sbin/update-rc.d ]; then
-  ln -sf $CHOME/tools/cassandra.init /etc/init.d/cassandra
+  ln -sf $CHOME/tools/cassandra.init.debian /etc/init.d/cassandra
   update-rc.d cassandra start 50 2 3 4 5 . stop 50 0 1 6 . >/dev/null
 else
   echo "not debian/ubuntu or debian. What??"
