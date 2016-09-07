@@ -12,6 +12,6 @@ error_exit()
   exit 1
 }
 
-invoke-rc.d cassandra stop
+service cassandra stop
 
 exit 0
