@@ -44,12 +44,13 @@ build do
   # General copy of all the decompressed tarball
   sync "apache-cassandra-#{version}", "#{install_dir}/embedded/apache-cassandra"
 
-  # Init files ...
-  erb source: "cassandra.init.debian.erb", dest: "#{install_dir}/embedded/apache-cassandra/tools/bin/cassandra.init.debian"
-  erb source: "cassandra.init.rhel.erb", dest: "#{install_dir}/embedded/apache-cassandra/tools/bin/cassandra.init.rhel"
-  erb source: "cqlsh.erb", dest: "#{install_dir}/embedded/apache-cassandra/bin/cqlsh", vars: { install_dir: install_dir }
+  # must read more doc to make something nicer out of this.
+  myos = nil
+  myos = 'redhat' if redhat?
+  myos = 'debian' if debian?
+  raise "unsupported OS - only rpm / deb based" unless myos
 
- "#{install_dir}/embedded/apache-cassandra/tools/bin"
-
+  erb source: "cassandra.init.#{myos}.erb", dest: "#{install_dir}/embedded/apache-cassandra/bin/cassandra.init", mode: 0755
+  erb source: "cqlsh.erb", dest: "#{install_dir}/embedded/apache-cassandra/bin/cqlsh", vars: { install_dir: install_dir }, mode: 0755
 end
 

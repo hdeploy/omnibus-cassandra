@@ -3,30 +3,6 @@
 # Perform necessary cassandra removal steps
 # after package is uninstalled.
 #
-
-grep patrick.viet /etc/init.d/cassandra > /dev/null 2>&1
-if [ $? == 0 ]; then
-  # It means it is indeed the package from hdeploy
-
-  # Determine if I'm on RH or on Debian/Ubuntu
-  if [ -x /usr/bin/yum ]; then
-    chkconfig --del cassandra
-  elif [ -x /usr/bin/apt-get ]; then
-    update-rc.d remove cassandra
-  else
-    echo "not debian/ubuntu or debian. What??"
-  fi
-
-  rm -f /etc/init.d/cassandra
-fi
-
-CHOME=`getent passwd cassandra | awk -F ':' '{ print $6; }'`
-if [ ${CHOME:0:15} == "/opt/cassandra/" ]; then
-  userdel -r cassandra
-  groupdel cassandra
-fi
-
-
 echo "cassandra has been uninstalled!"
 
 exit 0

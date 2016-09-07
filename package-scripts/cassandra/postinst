@@ -26,22 +26,19 @@ if ! getent passwd cassandra > /dev/null; then
 fi
 
 # useful symlink
-mkdir -p /opt/cassandra/bin
-ln -s ../embedded/apache-cassandra/bin/cqlsh /opt/cassandra/bin/cqlsh
+ln -sf embedded/apache-cassandra/bin /opt/cassandra/bin
 
 # Data and logs directories.
 mkdir -p $CHOME/logs $CHOME/data
 chown -R cassandra:cassandra $CHOME/logs $CHOME/data
 
 # Init scripts
+ln -sf $CHOME/bin/cassandra.init /etc/init.d/cassandra
+
 # Determine if I'm on RH or on Debian/Ubuntu
-if [ -x /usr/bin/yum ]; then
-  cp -f $CHOME/tools/bin/cassandra.init.rhel /etc/init.d/cassandra
-  chmod 755 /etc/init.d/cassandra
+if [ -x /sbin/chkconfig ]; then
   chkconfig --add cassandra
-elif [ -x /usr/bin/apt-get ]; then
-  cp -f $CHOME/tools/bin/cassandra.init.debian /etc/init.d/cassandra
-  chmod 755 /etc/init.d/cassandra
+elif [ -x /usr/sbin/update-rc.d ]; then
   update-rc.d cassandra start 50 2 3 4 5 . stop 50 0 1 6 . >/dev/null
 else
   echo "not debian/ubuntu or debian. What??"
