@@ -4,7 +4,7 @@ Omnibus packaging of Apache Cassandra, JRE and configuration
 ## Short version of below text
 
 This is just a packaging of Apache Cassandra and the JRE. It allows to run Cassandra without any effort.
-Just download it http://www.hdeploy.org/download/ , run ```rpm -Uvh``` or ```dpkg -i``` on the package, and it's ready to go.
+Just download it https://github.com/hdeploy/omnibus-cassandra/releases , run ```rpm -Uvh``` or ```dpkg -i``` on the package, and it's ready to go.
 
 # Why this packaging?
 
