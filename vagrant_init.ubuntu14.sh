@@ -17,6 +17,10 @@ apt-add-repository -y ppa:brightbox/ruby-ng
 apt-get update
 apt-get -y install ruby2.3 ruby2.3-dev git build-essential libgecode-dev
 
+# otherwise it crashes. yes I know its retarded...
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
 # We need bundle for the initial build
 gem install bundle
 

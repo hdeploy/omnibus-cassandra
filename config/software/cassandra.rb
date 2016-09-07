@@ -26,7 +26,6 @@ source url: "http://mirror.cogentco.com/pub/apache/cassandra/#{version}/apache-c
   logback-tools.xml
   logback.xml
   metrics-reporter-config-sample.yaml
-  triggers
 ].each do |f|
   project.config_file "#{install_dir}/embedded/apache-cassandra/conf/#{f}"
 end
