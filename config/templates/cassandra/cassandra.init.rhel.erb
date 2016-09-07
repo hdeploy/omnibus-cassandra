@@ -15,16 +15,13 @@
 
 export CASSANDRA_HOME=/opt/cassandra/embedded/apache-cassandra
 export CASSANDRA_CONF=$CASSANDRA_HOME/conf
-export CASSANDRA_INCLUDE=$CASSANDRA_HOME/cassandra.in.sh
+export CASSANDRA_INCLUDE=$CASSANDRA_HOME/bin/cassandra.in.sh
 export CASSANDRA_OWNR=cassandra
 NAME="cassandra"
 log_file=$CASSANDRA_HOME/logs/cassandra.log
 pid_file=$CASSANDRA_HOME/logs/cassandra.pid
 lock_file=/var/lock/subsys/$NAME
 CASSANDRA_PROG=$CASSANDRA_HOME/bin/cassandra
-
-# The first existing directory is used for JAVA_HOME if needed.
-JVM_SEARCH_DIRS="/usr/lib/jvm/jre /usr/lib/jvm/jre-1.7.* /usr/lib/jvm/java-1.7.*/jre"
 
 # Read configuration variable file if it is present
 [ -r /etc/default/$NAME ] && . /etc/default/$NAME
