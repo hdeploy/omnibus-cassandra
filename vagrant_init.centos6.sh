@@ -11,6 +11,10 @@ yum install -y /tmp/ruby23.rpm
 yum install -y http://opensource.wandisco.com/centos/6/git/x86_64/wandisco-git-release-6-1.noarch.rpm
 yum install -y patch rpm-build git
 
+# otherwise it crashes. yes I know its retarded...
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
 gem install bundle
 
 # Special thing: libgecode. building extensions takes forever...

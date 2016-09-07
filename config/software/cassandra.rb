@@ -46,7 +46,7 @@ build do
 
   erb source: "cassandra.init.debian.erb", dest: "#{install_dir}/embedded/apache-cassandra/tools/cassandra.init.debian", mode: 0755 # Debian/Ubuntu
   erb source: "cassandra.init.redhat.erb", dest: "#{install_dir}/embedded/apache-cassandra/tools/cassandra.init.redhat", mode: 0755 # RHEL6
-  erb source: "cassandra.service.systemd.erb", dest: "#{install_dir}/embedded/apache-cassandra/tools/cassandra.service.systemd", mode: 0755 # RHEL7
+  erb source: "cassandra.service.systemd.erb", dest: "#{install_dir}/embedded/apache-cassandra/tools/cassandra.service", mode: 0755 # RHEL7
 
   erb source: "cqlsh.erb", dest: "#{install_dir}/embedded/apache-cassandra/bin/cqlsh", vars: { install_dir: install_dir }, mode: 0755
 end

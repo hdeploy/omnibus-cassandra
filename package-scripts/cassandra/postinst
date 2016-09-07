@@ -36,8 +36,7 @@ chown -R cassandra:cassandra $CHOME/logs $CHOME/data
 
 # Determine if I'm on RH or on Debian/Ubuntu or Systemd etc
 if [ -x /bin/systemctl ]; then
-  ln -sf $CHOME/tools/cassandra.service.systemd /etc/systemd/system/cassandra.service
-  systemctl enable cassandra
+  systemctl enable $CHOME/tools/cassandra.service
 
 elif [ -x /sbin/chkconfig ]; then
   ln -sf $CHOME/bin/cassandra.init /etc/init.d/cassandra

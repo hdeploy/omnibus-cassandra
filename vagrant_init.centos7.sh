@@ -10,6 +10,10 @@ yum install -y /tmp/ruby23.rpm
 
 yum install -y patch rpm-build git
 
+# otherwise it crashes. yes I know its retarded...
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
 
 
 gem install bundle
