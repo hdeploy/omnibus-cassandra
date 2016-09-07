@@ -35,16 +35,20 @@ chown -R cassandra:cassandra $CHOME/logs $CHOME/data
 
 # Init scripts
 # Determine if I'm on RH or on Debian/Ubuntu
-if [ -e /etc/redhat-release ]; then
-
-else
+if [ -x /usr/bin/yum ]; then
+  cp -f $CHOME/tools/bin/cassandra.init.rhel /etc/init.d/cassandra
+  chmod 755 /etc/init.d/cassandra
+  chkconfig --add cassandra
+elif [ -x /usr/bin/apt-get ]; then
   cp -f $CHOME/tools/bin/cassandra.init.debian /etc/init.d/cassandra
   chmod 755 /etc/init.d/cassandra
   update-rc.d cassandra start 50 2 3 4 5 . stop 50 0 1 6 . >/dev/null
+else
+  echo "not debian/ubuntu or debian. What??"
 fi
 
-echo "Starting Cassandra...!"
-invoke-rc.d cassandra start
+echo "Starting Cassandra..."
+service cassandra start
 
 
 echo "Thank you for installing cassandra!"
