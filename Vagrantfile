@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
 
   {
     'centos6' => 'bento/centos-6.8',
-    #'centos7' =>  'bento/centos-7.2', # the build for el6 also works on el7
+    'centos7' =>  'bento/centos-7.2', # the build for el6 also works on el7
     'ubuntu14'=> 'bento/ubuntu-14.04',
     #'ubuntu12'=> 'bento/ubuntu-12.04', # actually the build for ubuntu14 works on ubuntu12 !! :)
   }.each do |os,img|
