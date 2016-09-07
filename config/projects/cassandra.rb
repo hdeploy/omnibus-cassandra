@@ -22,6 +22,21 @@ build_iteration 1
 dependency "cassandra"
 dependency "server-jre"
 
+config_files %w[
+  cassandra-env.ps1
+  cassandra-env.sh
+  cassandra-jaas.config
+  cassandra-rackdc.properties
+  cassandra-topology.properties
+  cassandra.yaml
+  commitlog_archiving.properties
+  jvm.options
+  logback-tools.xml
+  logback.xml
+  metrics-reporter-config-sample.yaml
+  triggers
+].map{|f| "#{install_dir}/embedded/apache-cassandra/conf/#{k}"}
+
 # Version manifest file
 #dependency "version-manifest"
 
