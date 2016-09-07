@@ -2,6 +2,7 @@ name "cassandra"
 default_version "3.7"
 
 dependency "server-jre"
+dependency "python" # For cqlsh. It needs python 2.7 ...
 
 license "Apache"
 skip_transitive_dependency_licensing true
@@ -30,7 +31,7 @@ build do
   # Init files ...
   erb source: "cassandra.init.debian.erb", dest: "#{install_dir}/embedded/apache-cassandra/tools/bin/cassandra.init.debian"
   erb source: "cassandra.init.rhel.erb", dest: "#{install_dir}/embedded/apache-cassandra/tools/bin/cassandra.init.rhel"
-
+  erb source: "cqlsh.erb", dest: "#{install_dir}/embedded/apache-cassandra/bin/cqlsh", vars: { install_dir: install_dir }
 
  "#{install_dir}/embedded/apache-cassandra/tools/bin"
 
