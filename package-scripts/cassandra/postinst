@@ -38,6 +38,7 @@ chown -R cassandra:cassandra $CHOME/logs $CHOME/data
 if [ -x /bin/systemctl ]; then
   ln -sf $CHOME/tools/cassandra.service.systemd /etc/systemd/system/cassandra.service
   systemctl enable $CHOME/tools/cassandra.service
+  systemctl daemon-reload
 
 elif [ -x /sbin/chkconfig ]; then
   ln -sf $CHOME/bin/cassandra.init /etc/init.d/cassandra
