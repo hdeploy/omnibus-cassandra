@@ -8,7 +8,7 @@ Just download it https://github.com/hdeploy/omnibus-cassandra/releases , run ```
 
 # Why this packaging?
 
-As of Sept 5 2016, HDeploy (and other projects I made such as Dynfirewall) require Apache Cassandra to run.
+As of Sept 2016, HDeploy (and other projects I made such as Dynfirewall) require Apache Cassandra to run.
 
 Apache Cassandra requires a bit of work to set up on your own, such as:
 - Some kind of Java runtime, which you must download / add repos / add to path / etc
@@ -29,6 +29,7 @@ It's a bundle a few pieces of software and config, which will be installed in /o
 List:
 - Apache Cassandra 3.7
 - Oracle Java runtime 1.8u74
+- Python 2.7 (for cqlsh) because it's not there in RHEL/Centos 6
 - A user 'cassandra' to run the daemon
 - A default configuration for Cassandra
 - A few symlinks, such as /usr/bin/java and /usr/bin/cqlsh if they don't already exist.
