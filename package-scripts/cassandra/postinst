@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Perform necessary cassandra setup steps
 # after package is installed.
