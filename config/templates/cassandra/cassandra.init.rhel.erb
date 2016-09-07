@@ -6,6 +6,10 @@
 # 
 # chkconfig: 2345 20 80
 # description: Starts and stops Cassandra
+#
+# origanilly from datastax rpm package
+# Modified By Patrick Viet <patrick.viet@gmail.com>
+#
 
 . /etc/rc.d/init.d/functions
 
@@ -14,7 +18,7 @@ export CASSANDRA_CONF=$CASSANDRA_HOME/conf
 export CASSANDRA_INCLUDE=$CASSANDRA_HOME/cassandra.in.sh
 export CASSANDRA_OWNR=cassandra
 NAME="cassandra"
-log_file=$CASSANDRA_HOME/logs/cassandra/cassandra.log
+log_file=$CASSANDRA_HOME/logs/cassandra.log
 pid_file=$CASSANDRA_HOME/logs/cassandra.pid
 lock_file=/var/lock/subsys/$NAME
 CASSANDRA_PROG=$CASSANDRA_HOME/bin/cassandra
@@ -34,7 +38,7 @@ case "$1" in
     start)
         # Cassandra startup
         echo -n "Starting Cassandra: "
-        su $CASSANDRA_OWNR -c "$CASSANDRA_PROG -p $pid_file" > $log_file 2>&1
+        su $CASSANDRA_OWNR -s /bin/bash -c "$CASSANDRA_PROG -p $pid_file" > $log_file 2>&1
         retval=$?
         [ $retval -eq 0 ] && touch $lock_file
         echo "OK"
