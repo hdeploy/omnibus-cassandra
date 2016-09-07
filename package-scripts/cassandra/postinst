@@ -47,10 +47,7 @@ else
   echo "not debian/ubuntu or debian. What??"
 fi
 
-echo "Starting Cassandra..."
-service cassandra start
-
-
 echo "Thank you for installing cassandra!"
+echo "You can start it by running 'service cassandra start' - don't forget to change the cluster name in $CHOME/conf/cassandra.yaml if you wish to"
 
 exit 0
