@@ -13,7 +13,23 @@ end
 
 source url: "http://mirror.cogentco.com/pub/apache/cassandra/#{version}/apache-cassandra-#{version}-bin.tar.gz"
 
-
+# Add some config files
+%w[
+  cassandra-env.ps1
+  cassandra-env.sh
+  cassandra-jaas.config
+  cassandra-rackdc.properties
+  cassandra-topology.properties
+  cassandra.yaml
+  commitlog_archiving.properties
+  jvm.options
+  logback-tools.xml
+  logback.xml
+  metrics-reporter-config-sample.yaml
+  triggers
+].each do |f|
+  project.config_file "#{install_dir}/embedded/apache-cassandra/conf/#{f}"
+end
 
 build do
   delete "apache-cassandra-#{version}/lib/sigar-bin/libsigar-amd64-solaris.so"

@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'pry'
 
 # Install omnibus
 gem 'omnibus', '~> 5.5'
